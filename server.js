@@ -100,7 +100,7 @@ app.delete('/fruits/:id', (req, res) => {
     })
 })
 
-mongoose.connect('mongodb://localhost:27017/basiccrud', () => {
+mongoose.connect('mongodb+srv://nickmullins:Blu3Be@rds^@fruits.rblk61z.mongodb.net/?retryWrites=true&w=majority', () => {
     console.log('The connection with mongod is established');
 })
 
