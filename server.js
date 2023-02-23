@@ -4,6 +4,8 @@ const methodOverride = require('method-override');
 const Fruit = require('./models/fruits.js');
 const app = express();
 
+
+
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
@@ -102,6 +104,12 @@ mongoose.connect('mongodb://localhost:27017/basiccrud', () => {
     console.log('The connection with mongod is established');
 })
 
-app.listen(3000, () => {
+let PORT = 3000;
+
+if(process.env.PORT){
+	PORT = process.env.PORT
+}
+
+app.listen(PORT, () => {
     console.log('listening...');
 })
