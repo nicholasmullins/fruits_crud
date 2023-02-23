@@ -25,7 +25,7 @@ app.post('/fruits', (req, res) => {
         req.body.readyToEat = false;
     }
     Fruit.create(req.body, (error, createdFruit) => {
-        res.send(createdFruit)
+        res.redirect('/fruits')
     })
 })
 
@@ -97,10 +97,17 @@ app.delete('/fruits/:id', (req, res) => {
 })
 
 
+// ROOT REDIRECT
+
+app.get('/', (req, res) => {
+    res.redirect('/fruits')
+})
+
+
 mongoose.set('strictQuery', false);
 
 mongoose.connect(process.env.MONGODB, () => {
-    console.log('The connection with mongod is established at ');
+    console.log('The connection with mongod is established at ' + process.env.MONGODB);
 })
 
 
