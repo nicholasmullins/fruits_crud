@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const Fruit = require('./models/fruits.js');
 const app = express();
+const port = process.env.PORT || 3001;
 
 
 
@@ -104,12 +105,7 @@ mongoose.connect('mongodb+srv://nickmullins:Blu3Be@rds^@fruits.rblk61z.mongodb.n
     console.log('The connection with mongod is established');
 })
 
-let PORT = 3000;
 
-if(process.env.PORT){
-	PORT = process.env.PORT
-}
-
-app.listen(PORT, () => {
+app.listen(port, () => {
     console.log('listening...');
 })
