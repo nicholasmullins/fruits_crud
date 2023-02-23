@@ -3,10 +3,9 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const Fruit = require('./models/fruits.js');
 const app = express();
+require('dotenv').config()
 const port = process.env.PORT || 3001;
 
-const nickURI = 'mongodb+srv://nickmullins:Blu3Be@rds^@fruits.rblk61z.mongodb.net/basicrud?retryWrites=true&w=majority'
-const baileyURI = 'mongodb+srv://nickmullins:Blu3Be@rds^@fruits.rblk61z.mongodb.net/basicrud'
 
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
@@ -27,9 +26,7 @@ app.post('/fruits', (req, res) => {
     }
     Fruit.create(req.body, (error, createdFruit) => {
         res.send(createdFruit)
-        // res.redirect('/fruits')
     })
-    // res.send('hello')
 })
 
 // SHOW
@@ -44,11 +41,9 @@ app.get('/fruits/:id', (req, res) => {
     })
 })
 
-
 // INDEX
 app.get('/fruits', (req, res) => {
     Fruit.find({}, (error, allFruits) => {
-        res.send(allFruits)
         res.render(
             'index.ejs',
             {
@@ -58,9 +53,6 @@ app.get('/fruits', (req, res) => {
     })
 
 })
-
-
-
 
 
 // EDIT
@@ -107,8 +99,8 @@ app.delete('/fruits/:id', (req, res) => {
 
 mongoose.set('strictQuery', false);
 
-mongoose.connect(baileyURI, () => {
-    console.log('The connection with mongod is established');
+mongoose.connect(process.env.MONGODB, () => {
+    console.log('The connection with mongod is established at ');
 })
 
 
